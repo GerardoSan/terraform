@@ -57,7 +57,7 @@ resource "azurerm_network_security_group" "webserver" {
 
 
 resource "azurerm_network_interface_security_group_association" "main" {
-  network_interface_id      = azurerm_network_interface.internal.id
+  network_interface_id      = azurerm_network_interface.main.id
   network_security_group_id = azurerm_network_security_group.webserver.id
 }
 
