@@ -13,5 +13,4 @@ provider "aws" {
 
 resource "aws_s3_bucket" "mi_bucket" {
   bucket = "grbios141016" 
-  acl    = "private"
 }
