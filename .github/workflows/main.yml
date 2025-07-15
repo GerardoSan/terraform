@@ -5,9 +5,9 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     env:
-    aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    aws_region: ${{ vars.AWS_REGION }}
+      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws_region: ${{ vars.AWS_REGION }}
 
     steps:
       - name: Checkout
