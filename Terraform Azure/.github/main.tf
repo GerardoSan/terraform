@@ -1,8 +1,17 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "6.3.0"
+    }
+  }
+}
+
 provider "aws" {
-  region = "us-east-1" # Cambia la región si lo necesitas
+  region = "us-east-1" 
 }
 
 resource "aws_s3_bucket" "mi_bucket" {
-  bucket = "nombre-unico-de-tu-bucket-12345" # Cambia este nombre por uno único
+  bucket = "grbios141016" 
   acl    = "private"
 }
