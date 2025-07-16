@@ -1,67 +1,32 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
+###### Modulos ######
 
-provider "aws" {
-  region = "us-east-1"
-}
-
-
-resource "aws_instance" "nginx_server" {
-  ami = "ami-020cba7c55df1f615"
+module "nginx_server_dev" {
+  source = "./nginx_server_module"
+  ami_id = "ami-020cba7c55df1f615"
   instance_type = "t2.micro"
-  tags = {
-    Name = "nginx-server"
-  }
-  user_data = <<-EOF
-    #!/bin/bash
-    sudo apt update
-    sudo apt install nginx -y
-    sudo systemctl start nginx
-    sudo systemctl enable nginx
-    EOF
-   
-    vpc_security_group_ids = [aws_security_group.mi_seguridad.id]
+  region = "us-east-1"
+} 
+
+output "public_ip_dev" {
+  value = module.nginx_server_dev.public_ip
 }
 
-resource "aws_security_group" "mi_seguridad" {
-  name = "mi_seguridad"
-  description = "Mi seguridad"
-  ingress {
-    from_port = 80
-    to_port = 80
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+output "public_dns_dev" {
+  value = module.nginx_server_dev.public_dns
 }
 
+module "nginx_server_prod" {
+  source = "./nginx_server_module"
+  ami_id = "ami-020cba7c55df1f615"
+  instance_type = "t2.micro"
+  region = "us-east-1"
+} 
 
-
-
-
-
-output "public_ip" {
-  value = aws_instance.nginx_server.public_ip
+output "public_ip_prod" {
+  value = module.nginx_server_prod.public_ip
 }
 
-output "public_dns" {
-  value = aws_instance.nginx_server.public_dns
+output "public_dns_prod" {
+  value = module.nginx_server_prod.public_dns
 }
+
