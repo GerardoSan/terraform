@@ -25,7 +25,7 @@ resource "aws_instance" "nginx_server" {
     sudo systemctl start nginx
     sudo systemctl enable nginx
     EOF
-    key_name = aws_key_pair.mi_key.key_name
+   
     vpc_security_group_ids = [aws_security_group.mi_seguridad.id]
 }
 
