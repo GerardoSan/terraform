@@ -14,3 +14,8 @@ variable "region" {
     description = "Region"
     default = "us-east-1"
 }
+
+variable "server_name" {
+    description = "Nombre del servidor"
+    default = "nginx-server"
+}

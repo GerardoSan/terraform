@@ -1,3 +1,14 @@
+### subir estados al s3 #####
+terraform {
+
+    backend "s3" {
+        bucket = "terraform451380"
+        key = "terraform09/terraform.tfstate"
+        region = "us-east-1"
+    }
+}
+
+
 ###### Modulos ######
 
 module "nginx_server_dev" {
@@ -5,6 +16,7 @@ module "nginx_server_dev" {
   ami_id = "ami-020cba7c55df1f615"
   instance_type = "t2.micro"
   region = "us-east-1"
+  server_name = "nginx-server-dev"
 } 
 
 output "public_ip_dev" {
@@ -20,6 +32,7 @@ module "nginx_server_prod" {
   ami_id = "ami-020cba7c55df1f615"
   instance_type = "t2.micro"
   region = "us-east-1"
+  server_name = "nginx-server-prod"
 } 
 
 output "public_ip_prod" {
