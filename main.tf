@@ -55,7 +55,7 @@ resource "aws_security_group" "mi_seguridad" {
 
 resource "aws_key_pair" "mi_key" {
   key_name = "mi_key"
-  public_key = file("nginx-server.pub")
+  public_key = file("~/.ssh/nginx-server.pub")
 }
 
 
