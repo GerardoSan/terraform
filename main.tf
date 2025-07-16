@@ -11,6 +11,11 @@ provider "aws" {
   region = "us-east-1"
 }
 
+variable "nginx_server_pub" {
+  description = "Llave pública para el servidor nginx"
+  type        = string
+}
+
 resource "aws_instance" "nginx_server" {
   ami = "ami-0c55b159cbfafe1f0"
   instance_type = "t2.micro"
@@ -54,9 +59,11 @@ resource "aws_security_group" "mi_seguridad" {
 
 
 resource "aws_key_pair" "mi_key" {
-  key_name = "mi_key"
-  public_key = file("~/.ssh/nginx-server.pub")
+  key_name   = "mi_key"
+  public_key = var.nginx_server_pub
 }
+
+
 
 
 output "public_ip" {
